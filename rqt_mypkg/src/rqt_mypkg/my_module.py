@@ -6,44 +6,57 @@ from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QWidget
 from MyWidget import MyWidget
+from MyWidgetWC import MyWidgetWC
+from bag_widget import BagWidget
 class MyPlugin(Plugin):
 
     def __init__(self, context):
         super(MyPlugin, self).__init__(context)
         # Give QObjects reasonable names
-        self.setObjectName('MyPlugin')
+        self.setObjectName('MyPlugin Noob')
 
         # Process standalone plugin command-line arguments
-        from argparse import ArgumentParser
-        parser = ArgumentParser()
-        # Add argument(s) to the parser.
-        parser.add_argument("-q", "--quiet", action="store_true",
-                      dest="quiet",
-                      help="Put plugin in silent mode")
-        args, unknowns = parser.parse_known_args(context.argv())
-        if not args.quiet:
-            print 'arguments: ', args
-            print 'unknowns: ', unknowns
+        # from argparse import ArgumentParser
+        # parser = ArgumentParser()
+        # # Add argument(s) to the parser.
+        # parser.add_argument("-q", "--quiet", action="store_true",
+        #               dest="quiet",
+        #               help="Put plugin in silent mode")
+        # args, unknowns = parser.parse_known_args(context.argv())
+        # if not args.quiet:
+        #     print 'arguments: ', args
+        #     print 'unknowns: ', unknowns
 
         # Create QWidget
-        self._widget = MyWidget()
+        self._widget = MyWidgetWC()
+        self._widget.move(0,0)
         # Get path to UI file which should be in the "resource" folder of this package
         #ui_file = os.path.join(rospkg.RosPack().get_path('rqt_mypkg'), 'resource', 'MyPlugin.ui')
         # Extend the widget with all attributes and children from UI file
         #loadUi(ui_file, self._widget)
         # Give QObjects reasonable names
-        self._widget.setObjectName("MyPluginUi")
+        
+        #self._widget.setStyleSheet("background-color:red;");
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
         # plugins at once. Also if you open multiple instances of your 
         # plugin at once, these lines add number to make it easy to 
+        
+
+        # Second Tab for Controling slider and Button
+        #self._widget2 = MyWidget()
+        #self._widget2.setObjectName("MyNoobTest")
+        #self._widget2.setWindowTitle("Simple2")
+        #self._widget2.setStyleSheet("background-color:green;");
         # tell from pane to pane.
-        if context.serial_number() > 1:
-            self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
+        
+        #self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
+        #self._widget2.setWindowTitle(self._widget2.windowTitle() + (' (%d)' % context.serial_number()))
 
         # Add widget to the user interface
         
         context.add_widget(self._widget)
+        #context.add_widget(self._widget2)
 
     def shutdown_plugin(self):
         # TODO unregister all publishers here

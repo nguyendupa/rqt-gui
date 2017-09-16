@@ -4,7 +4,7 @@
       An example Python GUI plugin to create a great user interface.
     </description>
     <qtgui>
-      <!-- optional grouping...
+      <!-- optional grouping...l
       <group>
         <label>Group</label>
       </group>
